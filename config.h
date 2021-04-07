@@ -1,10 +1,7 @@
-/*
- * appearance
- *
- * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
- */
-//static char *font = "JetBrainsMono Nerd Font Mono:pixelsize=9:antialias=true:autohint=true";
-static char *font = "JetBrainsMono Nerd Font Mono:pixelsize=9";
+/* appearance */
+/* font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html*/
+
+static char *font = "JetBrainsMono Nerd Font Mono:pixelsize=9:antialias=true:autohint=true";
 static int borderpx = 0;
 
 /*
@@ -30,7 +27,6 @@ static float chscale = 1.0;
 
 /*
  * word delimiter string
- *
  * More advanced example: L" `'\"()[]{}"
  */
 wchar_t *worddelimiters = L" ";

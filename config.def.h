@@ -1,10 +1,6 @@
-/* See LICENSE file for copyright and license details. */
+/* appearance */ 
+/* font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html*/
 
-/*
- * appearance
- *
- * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
- */
 static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
 static int borderpx = 2;
 
@@ -26,12 +22,11 @@ char *stty_args = "stty raw pass8 nl -echo -iexten -cstopb 38400";
 char *vtiden = "\033[?6c";
 
 /* Kerning / character bounding-box multipliers */
-static float cwscale = 1.0;
+static float cwscale = 1.1;
 static float chscale = 1.0;
 
 /*
  * word delimiter string
- *
  * More advanced example: L" `'\"()[]{}"
  */
 wchar_t *worddelimiters = L" ";
@@ -74,7 +69,7 @@ static unsigned int cursorthickness = 2;
 static int bellvolume = 0;
 
 /* default TERM value */
-char *termname = "st-256color";
+char *termname = "st";
 
 /*
  * spaces per tab
