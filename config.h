@@ -1,7 +1,7 @@
 /* appearance */
 /* font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html*/
 
-static char *font = "JetBrainsMono Nerd Font Mono:pixelsize=9:antialias=true:autohint=true";
+static char *font = "Liberation Mono:pixelsize=9:antialias=true:autohint=true";
 static int borderpx = 0;
 
 /*
@@ -121,9 +121,9 @@ static const char *colorname[] = {
  * Default colors (colorname index)
  * foreground, background, cursor
  */
-unsigned int defaultfg = 15;
-unsigned int defaultbg = 0;
-static unsigned int defaultcs = 15;
+unsigned int defaultfg = 257;
+unsigned int defaultbg = 256;
+static unsigned int defaultcs = 258;
 static unsigned int defaultrcs = 257;
 
 /*
