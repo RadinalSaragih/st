@@ -1,7 +1,7 @@
 /* appearance */
 /* font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html*/
 
-static char *font = "Liberation Mono:pixelsize=9:antialias=true:autohint=true";
+static char *font = "Monospace:pixelsize=9";
 static int borderpx = 0;
 
 /*
@@ -14,6 +14,7 @@ static int borderpx = 0;
  */
 static char *shell = "/bin/sh";
 char *utmp = NULL;
+
 /* scroll program: to enable use a string like "scroll" */
 char *scroll = NULL;
 char *stty_args = "stty raw pass8 nl -echo -iexten -cstopb 38400";
@@ -69,7 +70,7 @@ static unsigned int cursorthickness = 2;
 static int bellvolume = 0;
 
 /* default TERM value */
-char *termname = "st";
+char *termname = "st-256color";
 
 /*
  * spaces per tab
@@ -92,29 +93,29 @@ unsigned int tabspaces = 8;
 static const char *colorname[] = {
 
   /* 8 normal colors */
-  [0] = "#282828", /* hard contrast: #1d2021 / soft contrast: #32302f */
-  [1] = "#cc241d", /* red     */
-  [2] = "#98971a", /* green   */
-  [3] = "#d79921", /* yellow  */
-  [4] = "#458588", /* blue    */
-  [5] = "#b16286", /* magenta */
-  [6] = "#689d6a", /* cyan    */
-  [7] = "#a89984", /* white   */
+  [0] =  "#151515", /* black   */
+  [1] =  "#ac4142", /* red     */
+  [2] =  "#90a959", /* green   */
+  [3] =  "#f4bf75", /* yellow  */
+  [4] =  "#6a9fb5", /* blue    */
+  [5] =  "#aa759f", /* magenta */
+  [6] =  "#75b5aa", /* cyan    */
+  [7] =  "#d0d0d0", /* white   */
 
   /* 8 bright colors */
-  [8]  = "#928374", /* black   */
-  [9]  = "#fb4934", /* red     */
-  [10] = "#b8bb26", /* green   */
-  [11] = "#fabd2f", /* yellow  */
-  [12] = "#83a598", /* blue    */
-  [13] = "#d3869b", /* magenta */
-  [14] = "#8ec07c", /* cyan    */
-  [15] = "#ebdbb2", /* white   */
+  [8] =  "#505050", /* black   */
+  [9] =  "#ac4142", /* red     */
+  [10] = "#90a959", /* green   */
+  [11] = "#f4bf75", /* yellow  */
+  [12] = "#6a9fb5", /* blue    */
+  [13] = "#aa759f", /* magenta */
+  [14] = "#75b5aa", /* cyan    */
+  [15] = "#f5f5f5", /* white   */
 
-  [256] = "#282828", /* BG */
-  [257] = "#ebdbb2", /* FG */
+  [256] = "#000000", /* BG */
+  [257] = "#ffffff", /* FG */
+  [258] = "#ffffff", /* Cursor Color */
 
-  [258] = "#ebdbb2", /* Cursor Color */
 };
 
 /*
@@ -223,9 +224,9 @@ static Shortcut shortcuts[] = {
 	{ ControlMask,          XK_Print,       toggleprinter,  {.i =  0} },
 	{ ShiftMask,            XK_Print,       printscreen,    {.i =  0} },
 	{ XK_ANY_MOD,           XK_Print,       printsel,       {.i =  0} },
-	{ TERMMOD,              XK_Prior,       zoom,           {.f = +1} },
-	{ TERMMOD,              XK_Next,        zoom,           {.f = -1} },
-	{ TERMMOD,              XK_Home,        zoomreset,      {.f =  0} },
+	{ ControlMask|ShiftMask,XK_plus,        zoom,           {.f = +1} },
+	{ ControlMask,          XK_minus,       zoom,           {.f = -1} },
+	{ ControlMask,          XK_equal,       zoomreset,      {.f =  0} },
 	{ TERMMOD,              XK_C,           clipcopy,       {.i =  0} },
 	{ TERMMOD,              XK_V,           clippaste,      {.i =  0} },
 	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
