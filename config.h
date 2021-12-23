@@ -214,6 +214,24 @@ static MouseShortcut mshortcuts[] = {
 	{ XK_ANY_MOD,           Button5, ttysend,        {.s = "\005"} },
 };
 
+/*
+ TODO: add this to the manpage.
+ keyboard_select bindings.
+
+ * h, j, k, l:    move cursor left/down/up/right (also with arrow keys)
+ * !, _, *:       move cursor to the middle of the line/column/screen
+ * Backspace, $:  move cursor to the beginning/end of the line
+ * PgUp, PgDown : move cursor to the beginning/end of the column
+ * Home, End:     move cursor to the top/bottom left corner of the screen
+ * /, ?:          activate input mode and search up/down
+ * n, N:          repeat last search, up/down
+ * s:             toggle move/selection mode
+ * t:             toggle regular/rectangular selection type
+ * Return:        quit keyboard_select, keeping the highlight of the selection
+ * Escape:        quit keyboard_select 
+
+*/
+
 /* Internal keyboard shortcuts. */
 #define MODKEY Mod1Mask
 #define TERMMOD (ControlMask|ShiftMask)
@@ -234,6 +252,7 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
 	{ ShiftMask,            XK_Page_Up,     kscrollup,      {.i = -1} },
 	{ ShiftMask,            XK_Page_Down,   kscrolldown,    {.i = -1} },
+	{ MODKEY,               XK_s,           keyboard_select,{.i =  0} },
 };
 
 /*
