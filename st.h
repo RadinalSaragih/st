@@ -115,6 +115,8 @@ void *xrealloc(void *, size_t);
 char *xstrdup(const char *);
 int  trt_kbdselect(KeySym, char *, int);
 
+int xgetcolor(int x, unsigned char *r, unsigned char *g, unsigned char *b);
+
 /* config.h globals */
 extern char *utmp;
 extern char *scroll;
@@ -127,3 +129,4 @@ extern char *termname;
 extern unsigned int tabspaces;
 extern unsigned int defaultfg;
 extern unsigned int defaultbg;
+extern unsigned int defaultcs;
