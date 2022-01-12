@@ -1911,6 +1911,7 @@ csireset(void)
 	memset(&csiescseq, 0, sizeof(csiescseq));
 }
 
+void
 osc4_color_response(int num)
 {
 	int n;
