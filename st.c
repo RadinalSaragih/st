@@ -2040,8 +2040,8 @@ strhandle(void)
 				fprintf(stderr, "erresc: invalid color j=%d, p=%s\n",
 				        j, p ? p : "(null)");
 			} else {
-                if (j == defaultbg)
-                    xclearwin();
+                		if (j == defaultbg)
+                    			xclearwin();
 				redraw();
 			}
 			return;
