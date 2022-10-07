@@ -94,31 +94,29 @@ float alpha = 0.8;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
-
-  /* 8 normal colors */
-  [0] =  "#151515", /* black   */
-  [1] =  "#ac4142", /* red     */
-  [2] =  "#90a959", /* green   */
-  [3] =  "#f4bf75", /* yellow  */
-  [4] =  "#6a9fb5", /* blue    */
-  [5] =  "#aa759f", /* magenta */
-  [6] =  "#75b5aa", /* cyan    */
-  [7] =  "#d0d0d0", /* white   */
-
-  /* 8 bright colors */
-  [8] =  "#505050", /* black   */
-  [9] =  "#ac4142", /* red     */
-  [10] = "#90a959", /* green   */
-  [11] = "#f4bf75", /* yellow  */
-  [12] = "#6a9fb5", /* blue    */
-  [13] = "#aa759f", /* magenta */
-  [14] = "#75b5aa", /* cyan    */
-  [15] = "#f5f5f5", /* white   */
-
-  [256] = "#000000", /* BG */
-  [257] = "#ffffff", /* FG */
-  [258] = "#ffffff", /* Cursor Color */
-
+	/* 8 normal colors */
+	[0] =  "#151515", /* black   */
+	[1] =  "#ac4142", /* red     */
+	[2] =  "#90a959", /* green   */
+	[3] =  "#f4bf75", /* yellow  */
+	[4] =  "#6a9fb5", /* blue    */
+	[5] =  "#aa759f", /* magenta */
+	[6] =  "#75b5aa", /* cyan    */
+	[7] =  "#d0d0d0", /* white   */
+	
+	/* 8 bright colors */
+	[8] =  "#505050", /* black   */
+	[9] =  "#ac4142", /* red     */
+	[10] = "#90a959", /* green   */
+	[11] = "#f4bf75", /* yellow  */
+	[12] = "#6a9fb5", /* blue    */
+	[13] = "#aa759f", /* magenta */
+	[14] = "#75b5aa", /* cyan    */
+	[15] = "#f5f5f5", /* white   */
+	
+	[256] = "#000000", /* BG */
+	[257] = "#ffffff", /* FG */
+	[258] = "#ffffff", /* Cursor Color */
 };
 
 /*
