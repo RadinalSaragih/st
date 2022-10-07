@@ -1227,7 +1227,7 @@ xinit(int cols, int rows)
 	xw.attrs.colormap = xw.cmap;
 
 	xw.win = XCreateWindow(xw.dpy, parent, xw.l, xw.t,
-+			win.w, win.h, 0, xw.depth, InputOutput,
+			win.w, win.h, 0, xw.depth, InputOutput,
 			xw.vis, CWBackPixel | CWBorderPixel | CWBitGravity
 			| CWEventMask | CWColormap, &xw.attrs);
 
