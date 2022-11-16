@@ -1929,7 +1929,6 @@ osc_color_response(int num, int index, int is_osc4)
 	}
 }
 
-
 void
 strhandle(void)
 {
@@ -2739,8 +2738,6 @@ redraw(void)
 	draw();
 }
 
-
-
 void set_notifmode(int type, KeySym ksym) {
 	static char *lib[] = { " MOVE ", " SEL  "};
 	static Glyph *g, *deb, *fin;
@@ -2818,7 +2815,6 @@ int trt_kbdselect(KeySym ksym, char *buf, int len) {
 	static int sens, quant;
 	static char selectsearch_mode;
 	int i, bound, *xy;
-
 
 	if ( selectsearch_mode & 2 ) {
 		if ( ksym == XK_Return ) {
