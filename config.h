@@ -2,7 +2,7 @@
 /* font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html*/
 
 static char *font = "Monospace:pixelsize=9";
-static int borderpx = 0;
+static int borderperc = 0;
 
 /*
  * What program is execed by st depends of these precedence rules:
@@ -23,8 +23,8 @@ char *stty_args = "stty raw pass8 nl -echo -iexten -cstopb 38400";
 char *vtiden = "\033[?6c";
 
 /* Kerning / character bounding-box multipliers */
-static float cwscale = 1.1;
-static float chscale = 1.0;
+static float cwscale = 1.0f;
+static float chscale = 1.0f;
 
 /*
  * word delimiter string
@@ -103,7 +103,7 @@ static const char *colorname[] = {
 	[5] =  "#aa759f", /* magenta */
 	[6] =  "#75b5aa", /* cyan    */
 	[7] =  "#d0d0d0", /* white   */
-	
+
 	/* 8 bright colors */
 	[8] =  "#505050", /* black   */
 	[9] =  "#ac4142", /* red     */
@@ -113,7 +113,7 @@ static const char *colorname[] = {
 	[13] = "#aa759f", /* magenta */
 	[14] = "#75b5aa", /* cyan    */
 	[15] = "#f5f5f5", /* white   */
-	
+
 	[256] = "#000000", /* BG */
 	[257] = "#ffffff", /* FG */
 	[258] = "#ffffff", /* Cursor Color */
@@ -230,7 +230,7 @@ static MouseShortcut mshortcuts[] = {
  * s:             toggle move/selection mode
  * t:             toggle regular/rectangular selection type
  * Return:        quit keyboard_select, keeping the highlight of the selection
- * Escape:        quit keyboard_select 
+ * Escape:        quit keyboard_select
 
 */
 

@@ -52,6 +52,7 @@ enum selection_snap {
 	SNAP_LINE = 2
 };
 
+static int borderpx = 0;
 typedef unsigned char uchar;
 typedef unsigned int uint;
 typedef unsigned long ulong;
