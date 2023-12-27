@@ -39,6 +39,9 @@ static unsigned int tripleclicktimeout = 600;
 /* alt screens */
 int allowaltscreen = 1;
 
+/* alt screens */
+int use_bright_bold = 1;
+
 /* allow certain non-interactive (insecure) window operations such as:
    setting the clipboard text */
 int allowwindowops = 0;
@@ -198,7 +201,8 @@ ResourcePref resources[] = {
 		{ "borderpx",     INTEGER, &borderpx },
 		{ "cwscale",      FLOAT,   &cwscale },
 		{ "chscale",      FLOAT,   &chscale },
-		{ "alpha",	  FLOAT,   &alpha}
+		{ "alpha",	  FLOAT,   &alpha},
+		{ "brightBold",	  INTEGER, &use_bright_bold},
 };
 
 /*
