@@ -205,6 +205,7 @@ ResourcePref resources[] = {
 		{ "foreground",   STRING,  &colorname[258] },
 		{ "cursorColor",  STRING,  &colorname[256] },
 		{ "cursorStyle",  INTEGER, &cursorstyle },
+		{ "cursorThickness",  INTEGER, &cursorthickness },
 		{ "termname",     STRING,  &termname },
 		{ "shell",        STRING,  &shell },
 		{ "minlatency",   INTEGER, &minlatency },
