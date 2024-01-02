@@ -5,8 +5,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "hb.h"
+/* clang-format off */
 #include "st.h"
+#include "hb.h"
+/* clang-format on */
 
 #define FEATURE(c1, c2, c3, c4)                                                \
 	{                                                                      \

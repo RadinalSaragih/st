@@ -17,8 +17,10 @@
 
 char *argv0;
 #include "arg.h"
-#include "hb.h"
+/* clang-format off */
 #include "st.h"
+#include "hb.h"
+/* clang-format on */
 #include "win.h"
 
 /* types used in config.h */
