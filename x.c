@@ -6,6 +6,7 @@
 #include <X11/Xresource.h>
 #include <X11/cursorfont.h>
 #include <X11/keysym.h>
+#include <ctype.h>
 #include <errno.h>
 #include <libgen.h>
 #include <limits.h>
@@ -50,9 +51,10 @@ typedef struct {
 
 /* Xresources preferences */
 enum resource_type {
-	STRING = 0,
-	INTEGER = 1,
-	FLOAT = 2
+	STRING,
+	INTEGER,
+	FLOAT,
+	COLORCODE,
 };
 
 typedef struct {
@@ -214,6 +216,8 @@ static int match(uint, uint);
 
 static void run(void);
 static void usage(void);
+
+int color_code_valid(char *);
 
 static void (*handler[LASTEvent])(XEvent *) = {
     [KeyPress] = kpress,
@@ -1813,6 +1817,9 @@ xsettitle(char *p)
 int
 xstartdraw(void)
 {
+	if (IS_SET(MODE_VISIBLE))
+		XCopyArea(xw.dpy, xw.win, xw.buf, dc.gc, 0, 0, win.w, win.h, 0,
+		          0);
 	return IS_SET(MODE_VISIBLE);
 }
 
@@ -2204,9 +2211,28 @@ run(void)
 }
 
 int
+color_code_valid(char *color_code)
+{
+	char *c = color_code;
+
+	if (c == NULL || *(c + 0) != '#' || strlen(c) != 7)
+		return 0;
+	++c;
+	for (; *c != '\0'; c++) {
+		*c = (char)tolower(*c);
+		if ((*c <= '9' && *c >= '0') || (*c <= 'f' && *c >= 'a'))
+			continue;
+		return 0;
+	}
+
+	return 1;
+}
+
+int
 resource_load(XrmDatabase db, char *name, enum resource_type rtype, void *dst)
 {
 	char **sdst = dst;
+	char **clrdst = dst;
 	int *idst = dst;
 	float *fdst = dst;
 
@@ -2223,16 +2249,23 @@ resource_load(XrmDatabase db, char *name, enum resource_type rtype, void *dst)
 	    '\0';
 
 	XrmGetResource(db, fullname, fullclass, &type, &ret);
-	if (ret.addr == NULL || strncmp("String", type, 64))
+	if (ret.addr == NULL || strncmp("String", type, 64) != 0)
 		return 1;
 
 	switch (rtype) {
 	case STRING:
 		*sdst = ret.addr;
 		break;
-	case INTEGER:
-		*idst = strtoul(ret.addr, NULL, 10);
-		break;
+	case COLORCODE: {
+		if (color_code_valid(ret.addr))
+			*clrdst = ret.addr;
+	} break;
+	case INTEGER: {
+		unsigned long tmp;
+		tmp = strtoul(ret.addr, NULL, 10);
+		if (tmp >= 0 && tmp <= INT_MAX)
+			*idst = (int)tmp;
+	} break;
 	case FLOAT:
 		*fdst = strtof(ret.addr, NULL);
 		break;
