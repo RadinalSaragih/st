@@ -78,6 +78,7 @@ static void zoomabs(const Arg *);
 static void zoomreset(const Arg *);
 static void ttysend(const Arg *);
 static void setpalette(const Arg *);
+static void setAlpha(const Arg *);
 void kscrollup(const Arg *);
 void kscrolldown(const Arg *);
 
@@ -2301,6 +2302,21 @@ usage(void)
 	    " [stty_args ...]"
 	    "\n",
 	    argv0, argv0);
+}
+
+void
+setAlpha(const Arg *arg)
+{
+	alpha += arg->f;
+
+	if (alpha > 1.0f) {
+		alpha = 1.0f;
+	} else if (alpha < 0.0f) {
+		alpha = 0.0f;
+	}
+
+	xloadcols();
+	cresize(win.w, win.h);
 }
 
 void
