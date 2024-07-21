@@ -148,56 +148,9 @@ static char *palettes[][19] = {
 		"white",    // 17 BG
 		"red",	    // 18 CURSOR
 	},
-
-	{
-		"#eaeaea",  // 0
-		"#b7141f",  // 1
-		"#457b24",  // 2
-		"#fc7b08",  // 3
-		"#134eb2",  // 4
-		"#560088",  // 5
-		"#0e717c",  // 6
-		"#777777",  // 7
-
-		"#424242",  // 8
-		"#e83b3f",  // 9
-		"#7aba3a",  // 10
-		"#fd8e09",  // 11
-		"#54a4f3",  // 12
-		"#aa4dbc",  // 13
-		"#26bbd1",  // 14
-		"#aaaaaa",  // 15
-
-		"black",    // 16 FG
-		"white",    // 17 BG
-		"red",	    // 18 CURSOR
-	},
-
-	{
-		"#20242d",  // 0
-		"#b04b57",  // 1
-		"#87b379",  // 2
-		"#e5c179",  // 3
-		"#7d8fa4",  // 4
-		"#a47996",  // 5
-		"#85a7a5",  // 6
-		"#b3b8c3",  // 7
-
-		"#000000",  // 8
-		"#b04b57",  // 9
-		"#87b379",  // 10
-		"#e5c179",  // 11
-		"#7d8fa4",  // 12
-		"#a47996",  // 13
-		"#85a7a5",  // 14
-		"#ffffff",  // 15
-
-		"black",    // 16 FG
-		"white",    // 17 BG
-		"red",	    // 18 CURSOR
-	},
 };
 
+static int use_light_palette = 0;
 static char **colorname;
 
 /*
@@ -256,126 +209,85 @@ static uint forcemousemod = ShiftMask;
  * Xresources preferences to load at startup
  */
 ResourcePref resources[] = {
-		{ "font",         STRING,  &font },
+		{ "font",              STRING,  &font },
 
-		{ "color0",       COLORCODE,  &palettes[0][0] },
-		{ "color1",       COLORCODE,  &palettes[0][1] },
-		{ "color2",       COLORCODE,  &palettes[0][2] },
-		{ "color3",       COLORCODE,  &palettes[0][3] },
-		{ "color4",       COLORCODE,  &palettes[0][4] },
-		{ "color5",       COLORCODE,  &palettes[0][5] },
-		{ "color6",       COLORCODE,  &palettes[0][6] },
-		{ "color7",       COLORCODE,  &palettes[0][7] },
-		{ "color8",       COLORCODE,  &palettes[0][8] },
-		{ "color9",       COLORCODE,  &palettes[0][9] },
-		{ "color10",      COLORCODE,  &palettes[0][10] },
-		{ "color11",      COLORCODE,  &palettes[0][11] },
-		{ "color12",      COLORCODE,  &palettes[0][12] },
-		{ "color13",      COLORCODE,  &palettes[0][13] },
-		{ "color14",      COLORCODE,  &palettes[0][14] },
-		{ "color15",      COLORCODE,  &palettes[0][15] },
+		{ "color0",            COLORCODE,  &palettes[0][0] },
+		{ "color1",            COLORCODE,  &palettes[0][1] },
+		{ "color2",            COLORCODE,  &palettes[0][2] },
+		{ "color3",            COLORCODE,  &palettes[0][3] },
+		{ "color4",            COLORCODE,  &palettes[0][4] },
+		{ "color5",            COLORCODE,  &palettes[0][5] },
+		{ "color6",            COLORCODE,  &palettes[0][6] },
+		{ "color7",            COLORCODE,  &palettes[0][7] },
+		{ "color8",            COLORCODE,  &palettes[0][8] },
+		{ "color9",            COLORCODE,  &palettes[0][9] },
+		{ "color10",           COLORCODE,  &palettes[0][10] },
+		{ "color11",           COLORCODE,  &palettes[0][11] },
+		{ "color12",           COLORCODE,  &palettes[0][12] },
+		{ "color13",           COLORCODE,  &palettes[0][13] },
+		{ "color14",           COLORCODE,  &palettes[0][14] },
+		{ "color15",           COLORCODE,  &palettes[0][15] },
 
-		{ "foreground",   COLORCODE,  &palettes[0][16] },
-		{ "background",   COLORCODE,  &palettes[0][17] },
-		{ "cursorColor",  COLORCODE,  &palettes[0][18] },
+		{ "foreground",        COLORCODE,  &palettes[0][16] },
+		{ "background",        COLORCODE,  &palettes[0][17] },
+		{ "cursorColor",       COLORCODE,  &palettes[0][18] },
 
-		{ "p0_color0",       COLORCODE,  &palettes[0][0] },
-		{ "p0_color1",       COLORCODE,  &palettes[0][1] },
-		{ "p0_color2",       COLORCODE,  &palettes[0][2] },
-		{ "p0_color3",       COLORCODE,  &palettes[0][3] },
-		{ "p0_color4",       COLORCODE,  &palettes[0][4] },
-		{ "p0_color5",       COLORCODE,  &palettes[0][5] },
-		{ "p0_color6",       COLORCODE,  &palettes[0][6] },
-		{ "p0_color7",       COLORCODE,  &palettes[0][7] },
-		{ "p0_color8",       COLORCODE,  &palettes[0][8] },
-		{ "p0_color9",       COLORCODE,  &palettes[0][9] },
-		{ "p0_color10",      COLORCODE,  &palettes[0][10] },
-		{ "p0_color11",      COLORCODE,  &palettes[0][11] },
-		{ "p0_color12",      COLORCODE,  &palettes[0][12] },
-		{ "p0_color13",      COLORCODE,  &palettes[0][13] },
-		{ "p0_color14",      COLORCODE,  &palettes[0][14] },
-		{ "p0_color15",      COLORCODE,  &palettes[0][15] },
+		{ "dark_color0",       COLORCODE,  &palettes[0][0] },
+		{ "dark_color1",       COLORCODE,  &palettes[0][1] },
+		{ "dark_color2",       COLORCODE,  &palettes[0][2] },
+		{ "dark_color3",       COLORCODE,  &palettes[0][3] },
+		{ "dark_color4",       COLORCODE,  &palettes[0][4] },
+		{ "dark_color5",       COLORCODE,  &palettes[0][5] },
+		{ "dark_color6",       COLORCODE,  &palettes[0][6] },
+		{ "dark_color7",       COLORCODE,  &palettes[0][7] },
+		{ "dark_color8",       COLORCODE,  &palettes[0][8] },
+		{ "dark_color9",       COLORCODE,  &palettes[0][9] },
+		{ "dark_color10",      COLORCODE,  &palettes[0][10] },
+		{ "dark_color11",      COLORCODE,  &palettes[0][11] },
+		{ "dark_color12",      COLORCODE,  &palettes[0][12] },
+		{ "dark_color13",      COLORCODE,  &palettes[0][13] },
+		{ "dark_color14",      COLORCODE,  &palettes[0][14] },
+		{ "dark_color15",      COLORCODE,  &palettes[0][15] },
 
-		{ "p0_foreground",   COLORCODE,  &palettes[0][16] },
-		{ "p0_background",   COLORCODE,  &palettes[0][17] },
-		{ "p0_cursorColor",  COLORCODE,  &palettes[0][18] },
+		{ "dark_foreground",   COLORCODE,  &palettes[0][16] },
+		{ "dark_background",   COLORCODE,  &palettes[0][17] },
+		{ "dark_cursorColor",  COLORCODE,  &palettes[0][18] },
 
-		{ "p1_color0",       COLORCODE,  &palettes[1][0] },
-		{ "p1_color1",       COLORCODE,  &palettes[1][1] },
-		{ "p1_color2",       COLORCODE,  &palettes[1][2] },
-		{ "p1_color3",       COLORCODE,  &palettes[1][3] },
-		{ "p1_color4",       COLORCODE,  &palettes[1][4] },
-		{ "p1_color5",       COLORCODE,  &palettes[1][5] },
-		{ "p1_color6",       COLORCODE,  &palettes[1][6] },
-		{ "p1_color7",       COLORCODE,  &palettes[1][7] },
-		{ "p1_color8",       COLORCODE,  &palettes[1][8] },
-		{ "p1_color9",       COLORCODE,  &palettes[1][9] },
-		{ "p1_color10",      COLORCODE,  &palettes[1][10] },
-		{ "p1_color11",      COLORCODE,  &palettes[1][11] },
-		{ "p1_color12",      COLORCODE,  &palettes[1][12] },
-		{ "p1_color13",      COLORCODE,  &palettes[1][13] },
-		{ "p1_color14",      COLORCODE,  &palettes[1][14] },
-		{ "p1_color15",      COLORCODE,  &palettes[1][15] },
+		{ "light_color0",       COLORCODE,  &palettes[1][0] },
+		{ "light_color1",       COLORCODE,  &palettes[1][1] },
+		{ "light_color2",       COLORCODE,  &palettes[1][2] },
+		{ "light_color3",       COLORCODE,  &palettes[1][3] },
+		{ "light_color4",       COLORCODE,  &palettes[1][4] },
+		{ "light_color5",       COLORCODE,  &palettes[1][5] },
+		{ "light_color6",       COLORCODE,  &palettes[1][6] },
+		{ "light_color7",       COLORCODE,  &palettes[1][7] },
+		{ "light_color8",       COLORCODE,  &palettes[1][8] },
+		{ "light_color9",       COLORCODE,  &palettes[1][9] },
+		{ "light_color10",      COLORCODE,  &palettes[1][10] },
+		{ "light_color11",      COLORCODE,  &palettes[1][11] },
+		{ "light_color12",      COLORCODE,  &palettes[1][12] },
+		{ "light_color13",      COLORCODE,  &palettes[1][13] },
+		{ "light_color14",      COLORCODE,  &palettes[1][14] },
+		{ "light_color15",      COLORCODE,  &palettes[1][15] },
 
-		{ "p1_foreground",   COLORCODE,  &palettes[1][16] },
-		{ "p1_background",   COLORCODE,  &palettes[1][17] },
-		{ "p1_cursorColor",  COLORCODE,  &palettes[1][18] },
+		{ "light_foreground",   COLORCODE,  &palettes[1][16] },
+		{ "light_background",   COLORCODE,  &palettes[1][17] },
+		{ "light_cursorColor",  COLORCODE,  &palettes[1][18] },
 
-		{ "p2_color0",       COLORCODE,  &palettes[2][0] },
-		{ "p2_color1",       COLORCODE,  &palettes[2][1] },
-		{ "p2_color2",       COLORCODE,  &palettes[2][2] },
-		{ "p2_color3",       COLORCODE,  &palettes[2][3] },
-		{ "p2_color4",       COLORCODE,  &palettes[2][4] },
-		{ "p2_color5",       COLORCODE,  &palettes[2][5] },
-		{ "p2_color6",       COLORCODE,  &palettes[2][6] },
-		{ "p2_color7",       COLORCODE,  &palettes[2][7] },
-		{ "p2_color8",       COLORCODE,  &palettes[2][8] },
-		{ "p2_color9",       COLORCODE,  &palettes[2][9] },
-		{ "p2_color10",      COLORCODE,  &palettes[2][10] },
-		{ "p2_color11",      COLORCODE,  &palettes[2][11] },
-		{ "p2_color12",      COLORCODE,  &palettes[2][12] },
-		{ "p2_color13",      COLORCODE,  &palettes[2][13] },
-		{ "p2_color14",      COLORCODE,  &palettes[2][14] },
-		{ "p2_color15",      COLORCODE,  &palettes[2][15] },
-
-		{ "p2_foreground",   COLORCODE,  &palettes[2][16] },
-		{ "p2_background",   COLORCODE,  &palettes[2][17] },
-		{ "p2_cursorColor",  COLORCODE,  &palettes[2][18] },
-
-		{ "p3_color0",       COLORCODE,  &palettes[3][0] },
-		{ "p3_color1",       COLORCODE,  &palettes[3][1] },
-		{ "p3_color2",       COLORCODE,  &palettes[3][2] },
-		{ "p3_color3",       COLORCODE,  &palettes[3][3] },
-		{ "p3_color4",       COLORCODE,  &palettes[3][4] },
-		{ "p3_color5",       COLORCODE,  &palettes[3][5] },
-		{ "p3_color6",       COLORCODE,  &palettes[3][6] },
-		{ "p3_color7",       COLORCODE,  &palettes[3][7] },
-		{ "p3_color8",       COLORCODE,  &palettes[3][8] },
-		{ "p3_color9",       COLORCODE,  &palettes[3][9] },
-		{ "p3_color10",      COLORCODE,  &palettes[3][10] },
-		{ "p3_color11",      COLORCODE,  &palettes[3][11] },
-		{ "p3_color12",      COLORCODE,  &palettes[3][12] },
-		{ "p3_color13",      COLORCODE,  &palettes[3][13] },
-		{ "p3_color14",      COLORCODE,  &palettes[3][14] },
-		{ "p3_color15",      COLORCODE,  &palettes[3][15] },
-
-		{ "p3_foreground",   COLORCODE,  &palettes[3][16] },
-		{ "p3_background",   COLORCODE,  &palettes[3][17] },
-		{ "p3_cursorColor",  COLORCODE,  &palettes[3][18] },
-
-		{ "cursorStyle",  INTEGER, &cursorstyle },
-		{ "cursorThickness",  INTEGER, &cursorthickness },
-		{ "termname",     STRING,  &termname },
-		{ "shell",        STRING,  &shell },
-		{ "minlatency",   INTEGER, &minlatency },
-		{ "maxlatency",   INTEGER, &maxlatency },
-		{ "blinktimeout", INTEGER, &blinktimeout },
-		{ "bellvolume",   INTEGER, &bellvolume },
-		{ "tabspaces",    INTEGER, &tabspaces },
-		{ "borderpx",     INTEGER, &borderpx },
-		{ "cwscale",      FLOAT,   &cwscale },
-		{ "chscale",      FLOAT,   &chscale },
-		{ "alpha",        FLOAT,   &alpha },
+		{ "lightmode",          INTEGER,    &use_light_palette },
+		{ "cursorStyle",        INTEGER,    &cursorstyle },
+		{ "cursorThickness",    INTEGER,    &cursorthickness },
+		{ "termname",           STRING,     &termname },
+		{ "shell",              STRING,     &shell },
+		{ "minlatency",         INTEGER,    &minlatency },
+		{ "maxlatency",         INTEGER,    &maxlatency },
+		{ "blinktimeout",       INTEGER,    &blinktimeout },
+		{ "bellvolume",         INTEGER,    &bellvolume },
+		{ "tabspaces",          INTEGER,    &tabspaces },
+		{ "borderpx",           INTEGER,    &borderpx },
+		{ "cwscale",            FLOAT,      &cwscale },
+		{ "chscale",            FLOAT,      &chscale },
+		{ "alpha",              FLOAT,      &alpha },
 };
 
 
@@ -416,13 +328,6 @@ static Shortcut shortcuts[] = {
 	{ ShiftMask,            XK_Page_Down, 	kscrolldown,    {.i = -1} },
 	{ MODKEY|ShiftMask,     XK_F1,          setpalette,     {.i =  0} },
 	{ MODKEY|ShiftMask,     XK_F2,          setpalette,     {.i =  1} },
-	{ MODKEY|ShiftMask,     XK_F3,          setpalette,     {.i =  2} },
-	{ MODKEY|ShiftMask,     XK_F4,          setpalette,     {.i =  3} },
-	{ MODKEY|ShiftMask,     XK_F5,          setpalette,     {.i =  4} },
-	{ MODKEY|ShiftMask,     XK_F6,          setpalette,     {.i =  5} },
-	{ MODKEY|ShiftMask,     XK_F7,          setpalette,     {.i =  6} },
-	{ MODKEY|ShiftMask,     XK_F8,          setpalette,     {.i =  7} },
-	{ MODKEY|ShiftMask,     XK_F9,          setpalette,     {.i =  8} },
 	{ MODKEY|ShiftMask,     XK_F10,         setAlpha,       {.f =  -0.1} },
 	{ MODKEY,               XK_F10,         setAlpha,       {.f =  0.1} },
 };
