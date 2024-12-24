@@ -79,7 +79,6 @@ static void zoomreset(const Arg *);
 static void ttysend(const Arg *);
 static void setpalette(const Arg *);
 static void setAlpha(const Arg *);
-static void togglePalette(const Arg *);
 void kscrollup(const Arg *);
 void kscrolldown(const Arg *);
 
@@ -2325,19 +2324,9 @@ setpalette(const Arg *arg)
 {
 	if (arg->i < LEN(palettes)) {
 		colorname = palettes[arg->i];
-		current_palette = arg->i;
 		xloadcols();
 		cresize(win.w, win.h);
 	}
-}
-
-void
-togglePalette(const Arg *_)
-{
-	current_palette = (current_palette == 0) ? 1 : 0;
-	colorname = palettes[current_palette];
-	xloadcols();
-	cresize(win.w, win.h);
 }
 
 int
