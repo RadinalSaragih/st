@@ -2386,6 +2386,7 @@ main(int argc, char *argv[])
 	ARGEND;
 
 run:
+	colorname = palettes[0];
 
 	if (argc > 0) /* eat all remaining arguments */
 		opt_cmd = argv;
@@ -2400,8 +2401,6 @@ run:
 		die("Can't open display\n");
 
 	config_init();
-
-	colorname = palettes[use_light_palette == 1];
 
 	cols = MAX(cols, 1);
 	rows = MAX(rows, 1);
