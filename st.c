@@ -1746,7 +1746,7 @@ csihandle(void)
 			ttywrite(vtiden, strlen(vtiden), 0);
 		break;
 	case 'b': /* REP -- if last char is printable print it <n> more times */
-		LIMIT(csiescseq.arg[0], 1, 65535);
+		DEFAULT(csiescseq.arg[0], 1);
 		if (term.lastc)
 			while (csiescseq.arg[0]-- > 0) tputc(term.lastc);
 		break;
@@ -1831,8 +1831,6 @@ csihandle(void)
 		}
 		break;
 	case 'S': /* SU -- Scroll <n> line up */
-		if (csiescseq.priv)
-			break;
 		DEFAULT(csiescseq.arg[0], 1);
 		tscrollup(term.top, csiescseq.arg[0]);
 		break;
