@@ -98,116 +98,45 @@ unsigned int tabspaces = 8;
 float alpha = 0.8f;
 
 /* Terminal colors (16 first used in escape sequence) */
+static const char *colorname[] = {
+	/* 8 normal colors */
+	"black",
+	"red3",
+	"green3",
+	"yellow3",
+	"blue2",
+	"magenta3",
+	"cyan3",
+	"gray90",
 
-/* Terminal colors (16 used in escape sequence) */
-static char *palettes[][19] = {
-	{
-		"black",    // 0
-		"red3",     // 1
-		"green3",   // 2
-		"yellow3",  // 3
-		"blue2",    // 4
-		"magenta3", // 5
-		"cyan3",    // 6
-		"gray90",   // 7
-		"gray50",   // 8
+	/* 8 bright colors */
+	"gray50",
+	"red",
+	"green",
+	"yellow",
+	"#5c5cff",
+	"magenta",
+	"cyan",
+	"white",
 
-		"red",	    // 9
-		"green",    // 10
-		"yellow",   // 11
-		"#5c5cff",  // 12
-		"magenta",  // 13
-		"cyan",	    // 14
-		"white",    // 15
+	[255] = 0,
 
-		"#ffffff",  // 16 FG
-		"#000000",  // 17 BG
-		"red",	    // 18 CURSOR
-	},
-
-	{
-		"#223",	    // 0
-		"#900",     // 1
-		"#080",     // 2
-		"#fe7",     // 3
-		"#35e",     // 4
-		"#fc5",     // 5
-		"#18e",     // 6
-		"#aaa",     // 7
-		"#666",     // 8
-
-		"#f25",     // 9
-		"#0b0",     // 10
-		"#ff6",     // 11
-		"#46f",     // 12
-		"#d6a",     // 13
-		"#6bf",     // 14
-		"#ddd",     // 15
-
-		"black",    // 16 FG
-		"white",    // 17 BG
-		"red",	    // 18 CURSOR
-	},
-
-	{
-		"#eaeaea",  // 0
-		"#b7141f",  // 1
-		"#457b24",  // 2
-		"#fc7b08",  // 3
-		"#134eb2",  // 4
-		"#560088",  // 5
-		"#0e717c",  // 6
-		"#777777",  // 7
-
-		"#424242",  // 8
-		"#e83b3f",  // 9
-		"#7aba3a",  // 10
-		"#fd8e09",  // 11
-		"#54a4f3",  // 12
-		"#aa4dbc",  // 13
-		"#26bbd1",  // 14
-		"#aaaaaa",  // 15
-
-		"black",    // 16 FG
-		"white",    // 17 BG
-		"red",	    // 18 CURSOR
-	},
-
-	{
-		"#20242d",  // 0
-		"#b04b57",  // 1
-		"#87b379",  // 2
-		"#e5c179",  // 3
-		"#7d8fa4",  // 4
-		"#a47996",  // 5
-		"#85a7a5",  // 6
-		"#b3b8c3",  // 7
-
-		"#000000",  // 8
-		"#b04b57",  // 9
-		"#87b379",  // 10
-		"#e5c179",  // 11
-		"#7d8fa4",  // 12
-		"#a47996",  // 13
-		"#85a7a5",  // 14
-		"#ffffff",  // 15
-
-		"black",    // 16 FG
-		"white",    // 17 BG
-		"red",	    // 18 CURSOR
-	},
+	/* more colors can be added after 255 to use with DefaultXX */
+	"#cccccc",
+	"#555555",
+	"gray90", /* default foreground colour */
+	"black", /* default background colour */
 };
 
-static char **colorname;
 
 /*
  * Default colors (colorname index)
  * foreground, background, cursor, reverse cursor
  */
-unsigned int defaultfg = 16;
-unsigned int defaultbg = 17;
-unsigned int defaultcs = 18;
-static unsigned int defaultrcs = 18;
+unsigned int defaultfg = 258;
+unsigned int defaultbg = 259;
+unsigned int defaultcs = 256;
+static unsigned int defaultrcs = 257;
 
 /*
  * https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h4-Functions-using-CSI-_-ordered-by-the-final-character-lparen-s-rparen:CSI-Ps-SP-q.1D81
@@ -257,91 +186,25 @@ static uint forcemousemod = ShiftMask;
  */
 ResourcePref resources[] = {
 		{ "font",         STRING,  &font },
-
-		{ "p0_color0",       COLORCODE,  &palettes[0][0] },
-		{ "p0_color1",       COLORCODE,  &palettes[0][1] },
-		{ "p0_color2",       COLORCODE,  &palettes[0][2] },
-		{ "p0_color3",       COLORCODE,  &palettes[0][3] },
-		{ "p0_color4",       COLORCODE,  &palettes[0][4] },
-		{ "p0_color5",       COLORCODE,  &palettes[0][5] },
-		{ "p0_color6",       COLORCODE,  &palettes[0][6] },
-		{ "p0_color7",       COLORCODE,  &palettes[0][7] },
-		{ "p0_color8",       COLORCODE,  &palettes[0][8] },
-		{ "p0_color9",       COLORCODE,  &palettes[0][9] },
-		{ "p0_color10",      COLORCODE,  &palettes[0][10] },
-		{ "p0_color11",      COLORCODE,  &palettes[0][11] },
-		{ "p0_color12",      COLORCODE,  &palettes[0][12] },
-		{ "p0_color13",      COLORCODE,  &palettes[0][13] },
-		{ "p0_color14",      COLORCODE,  &palettes[0][14] },
-		{ "p0_color15",      COLORCODE,  &palettes[0][15] },
-
-		{ "p0_foreground",   COLORCODE,  &palettes[0][16] },
-		{ "p0_background",   COLORCODE,  &palettes[0][17] },
-		{ "p0_cursorColor",  COLORCODE,  &palettes[0][18] },
-
-		{ "p1_color0",       COLORCODE,  &palettes[1][0] },
-		{ "p1_color1",       COLORCODE,  &palettes[1][1] },
-		{ "p1_color2",       COLORCODE,  &palettes[1][2] },
-		{ "p1_color3",       COLORCODE,  &palettes[1][3] },
-		{ "p1_color4",       COLORCODE,  &palettes[1][4] },
-		{ "p1_color5",       COLORCODE,  &palettes[1][5] },
-		{ "p1_color6",       COLORCODE,  &palettes[1][6] },
-		{ "p1_color7",       COLORCODE,  &palettes[1][7] },
-		{ "p1_color8",       COLORCODE,  &palettes[1][8] },
-		{ "p1_color9",       COLORCODE,  &palettes[1][9] },
-		{ "p1_color10",      COLORCODE,  &palettes[1][10] },
-		{ "p1_color11",      COLORCODE,  &palettes[1][11] },
-		{ "p1_color12",      COLORCODE,  &palettes[1][12] },
-		{ "p1_color13",      COLORCODE,  &palettes[1][13] },
-		{ "p1_color14",      COLORCODE,  &palettes[1][14] },
-		{ "p1_color15",      COLORCODE,  &palettes[1][15] },
-
-		{ "p1_foreground",   COLORCODE,  &palettes[1][16] },
-		{ "p1_background",   COLORCODE,  &palettes[1][17] },
-		{ "p1_cursorColor",  COLORCODE,  &palettes[1][18] },
-
-		{ "p2_color0",       COLORCODE,  &palettes[2][0] },
-		{ "p2_color1",       COLORCODE,  &palettes[2][1] },
-		{ "p2_color2",       COLORCODE,  &palettes[2][2] },
-		{ "p2_color3",       COLORCODE,  &palettes[2][3] },
-		{ "p2_color4",       COLORCODE,  &palettes[2][4] },
-		{ "p2_color5",       COLORCODE,  &palettes[2][5] },
-		{ "p2_color6",       COLORCODE,  &palettes[2][6] },
-		{ "p2_color7",       COLORCODE,  &palettes[2][7] },
-		{ "p2_color8",       COLORCODE,  &palettes[2][8] },
-		{ "p2_color9",       COLORCODE,  &palettes[2][9] },
-		{ "p2_color10",      COLORCODE,  &palettes[2][10] },
-		{ "p2_color11",      COLORCODE,  &palettes[2][11] },
-		{ "p2_color12",      COLORCODE,  &palettes[2][12] },
-		{ "p2_color13",      COLORCODE,  &palettes[2][13] },
-		{ "p2_color14",      COLORCODE,  &palettes[2][14] },
-		{ "p2_color15",      COLORCODE,  &palettes[2][15] },
-
-		{ "p2_foreground",   COLORCODE,  &palettes[2][16] },
-		{ "p2_background",   COLORCODE,  &palettes[2][17] },
-		{ "p2_cursorColor",  COLORCODE,  &palettes[2][18] },
-
-		{ "p3_color0",       COLORCODE,  &palettes[3][0] },
-		{ "p3_color1",       COLORCODE,  &palettes[3][1] },
-		{ "p3_color2",       COLORCODE,  &palettes[3][2] },
-		{ "p3_color3",       COLORCODE,  &palettes[3][3] },
-		{ "p3_color4",       COLORCODE,  &palettes[3][4] },
-		{ "p3_color5",       COLORCODE,  &palettes[3][5] },
-		{ "p3_color6",       COLORCODE,  &palettes[3][6] },
-		{ "p3_color7",       COLORCODE,  &palettes[3][7] },
-		{ "p3_color8",       COLORCODE,  &palettes[3][8] },
-		{ "p3_color9",       COLORCODE,  &palettes[3][9] },
-		{ "p3_color10",      COLORCODE,  &palettes[3][10] },
-		{ "p3_color11",      COLORCODE,  &palettes[3][11] },
-		{ "p3_color12",      COLORCODE,  &palettes[3][12] },
-		{ "p3_color13",      COLORCODE,  &palettes[3][13] },
-		{ "p3_color14",      COLORCODE,  &palettes[3][14] },
-		{ "p3_color15",      COLORCODE,  &palettes[3][15] },
-
-		{ "p3_foreground",   COLORCODE,  &palettes[3][16] },
-		{ "p3_background",   COLORCODE,  &palettes[3][17] },
-		{ "p3_cursorColor",  COLORCODE,  &palettes[3][18] },
-
+		{ "color0",       COLORCODE,  &colorname[0] },
+		{ "color1",       COLORCODE,  &colorname[1] },
+		{ "color2",       COLORCODE,  &colorname[2] },
+		{ "color3",       COLORCODE,  &colorname[3] },
+		{ "color4",       COLORCODE,  &colorname[4] },
+		{ "color5",       COLORCODE,  &colorname[5] },
+		{ "color6",       COLORCODE,  &colorname[6] },
+		{ "color7",       COLORCODE,  &colorname[7] },
+		{ "color8",       COLORCODE,  &colorname[8] },
+		{ "color9",       COLORCODE,  &colorname[9] },
+		{ "color10",      COLORCODE,  &colorname[10] },
+		{ "color11",      COLORCODE,  &colorname[11] },
+		{ "color12",      COLORCODE,  &colorname[12] },
+		{ "color13",      COLORCODE,  &colorname[13] },
+		{ "color14",      COLORCODE,  &colorname[14] },
+		{ "color15",      COLORCODE,  &colorname[15] },
+		{ "background",   COLORCODE,  &colorname[259] },
+		{ "foreground",   COLORCODE,  &colorname[258] },
+		{ "cursorColor",  COLORCODE,  &colorname[256] },
 		{ "cursorStyle",  INTEGER, &cursorstyle },
 		{ "cursorThickness",  INTEGER, &cursorthickness },
 		{ "termname",     STRING,  &termname },
@@ -393,15 +256,6 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
 	{ ShiftMask,            XK_Page_Up, 	kscrollup,      {.i = -1} },
 	{ ShiftMask,            XK_Page_Down, 	kscrolldown,    {.i = -1} },
-	{ MODKEY|ShiftMask,     XK_F1,          setpalette,     {.i =  0} },
-	{ MODKEY|ShiftMask,     XK_F2,          setpalette,     {.i =  1} },
-	{ MODKEY|ShiftMask,     XK_F3,          setpalette,     {.i =  2} },
-	{ MODKEY|ShiftMask,     XK_F4,          setpalette,     {.i =  3} },
-	{ MODKEY|ShiftMask,     XK_F5,          setpalette,     {.i =  4} },
-	{ MODKEY|ShiftMask,     XK_F6,          setpalette,     {.i =  5} },
-	{ MODKEY|ShiftMask,     XK_F7,          setpalette,     {.i =  6} },
-	{ MODKEY|ShiftMask,     XK_F8,          setpalette,     {.i =  7} },
-	{ MODKEY|ShiftMask,     XK_F9,          setpalette,     {.i =  8} },
 };
 
 /*
