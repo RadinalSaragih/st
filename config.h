@@ -258,27 +258,6 @@ static uint forcemousemod = ShiftMask;
 ResourcePref resources[] = {
 		{ "font",         STRING,  &font },
 
-		{ "color0",       COLORCODE,  &palettes[0][0] },
-		{ "color1",       COLORCODE,  &palettes[0][1] },
-		{ "color2",       COLORCODE,  &palettes[0][2] },
-		{ "color3",       COLORCODE,  &palettes[0][3] },
-		{ "color4",       COLORCODE,  &palettes[0][4] },
-		{ "color5",       COLORCODE,  &palettes[0][5] },
-		{ "color6",       COLORCODE,  &palettes[0][6] },
-		{ "color7",       COLORCODE,  &palettes[0][7] },
-		{ "color8",       COLORCODE,  &palettes[0][8] },
-		{ "color9",       COLORCODE,  &palettes[0][9] },
-		{ "color10",      COLORCODE,  &palettes[0][10] },
-		{ "color11",      COLORCODE,  &palettes[0][11] },
-		{ "color12",      COLORCODE,  &palettes[0][12] },
-		{ "color13",      COLORCODE,  &palettes[0][13] },
-		{ "color14",      COLORCODE,  &palettes[0][14] },
-		{ "color15",      COLORCODE,  &palettes[0][15] },
-
-		{ "foreground",   COLORCODE,  &palettes[0][16] },
-		{ "background",   COLORCODE,  &palettes[0][17] },
-		{ "cursorColor",  COLORCODE,  &palettes[0][18] },
-
 		{ "p0_color0",       COLORCODE,  &palettes[0][0] },
 		{ "p0_color1",       COLORCODE,  &palettes[0][1] },
 		{ "p0_color2",       COLORCODE,  &palettes[0][2] },
